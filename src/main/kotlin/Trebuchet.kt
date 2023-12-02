@@ -56,7 +56,7 @@ fun trebuchet1(): String {
    return sum.toString()
 }
 
-const val input =
+private const val input =
       """four9one
 bbzhsmnmtf8kftwosevenxfkssgrcjthree
 6pkkcddsixsixjgnjvdtjtwo
