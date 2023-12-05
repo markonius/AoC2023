@@ -1,5 +1,7 @@
+import kotlin.time.measureTime
+
 fun main() {
-   val problemNumber = arrayOf(4, 1)
+   val problemNumber = arrayOf(5, 1)
 
    val problems =
          arrayOf(
@@ -7,9 +9,14 @@ fun main() {
                cubeConundrum,
                gearRatios,
                scratchcards,
+               fertilizer,
          )
 
    val problem = problems[problemNumber[0] - 1][problemNumber[1]]
-   val output = problem()
+   var output: String
+   val time = measureTime {
+       output = problem()
+   }
    println(output)
+   println("Time elapsed: $time")
 }

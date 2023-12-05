@@ -1,0 +1,1 @@
+val allNumbersParser = "\\d+".toRegex()
