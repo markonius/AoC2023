@@ -126,8 +126,8 @@ fun hauntedWasteland1(): String {
    // There are hidden invariants in the data:
    // 1. All paths loop.
    // 2. There are nodes that are traversed in the beginning that are not part of the loop.
-   // 2. All paths only ever reach one potential end.
-   // 3. All ends are reached at steps equal to the period of the loop.
+   // 3. All paths only ever reach one potential end.
+   // 4. All ends are reached at steps equal to the period of the loop.
    //		In other words, the number of steps made before the loop starts can be ignored.
    val lcm = findLeastCommonMultiple(paths.map { p -> p.potentialEnds[0] })
    return lcm.toString()
