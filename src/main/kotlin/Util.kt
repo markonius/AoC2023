@@ -30,3 +30,17 @@ fun findLeastCommonMultiple(numbers: List<Long>): Long {
    }
    return factors.reduce { a, f -> a * f }
 }
+
+fun getPadded2DInput(input: String): List<String> {
+   val lines = input.lines().toMutableList()
+   val length = input.lines()[0].length
+
+   for (i in 0 until lines.size) {
+      lines[i] = ".${lines[i]}."
+   }
+
+   lines.add(0, ".".repeat(length + 2))
+   lines.add(".".repeat(length + 2))
+
+   return lines
+}
