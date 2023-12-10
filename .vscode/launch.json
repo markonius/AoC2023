@@ -10,7 +10,7 @@
 			"name": "Kotlin Launch",
 			"projectRoot": "${workspaceFolder}",
 			"mainClass": "MainKt",
-			"preLaunchTask": "mvn compile"
+			"preLaunchTask": "mvn compile",
 		}
 	]
 }

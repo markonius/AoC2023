@@ -66,6 +66,7 @@ fun pipeMaze1(): String {
          get() = connections.map { c -> c.first + x to c.second + y }
    }
 
+   // Find parts
    val startPosition = lines.mapIndexed { y, l -> l.indexOf('S') to y }.first { p -> p.first != -1 }
    val startPart =
          Part(
@@ -106,7 +107,66 @@ fun pipeMaze1(): String {
       parts.add(nextPart)
    } while (currentPart.position != startPart.position)
 
-   return (partCount / 2).toString()
+   // Flood fill
+   val searchBoard = Array<ByteArray>(lines.size * 2) { _ -> ByteArray(lines[0].length * 2) }
+
+   fun paintPart(currentPosition: Pair<Int, Int>, previousPosition: Pair<Int, Int>) {
+
+      val difference =
+            currentPosition.first - previousPosition.first to
+                  currentPosition.second - previousPosition.second
+      val inBetweenPosition =
+            currentPosition.first * 2 - difference.first to
+                  currentPosition.second * 2 - difference.second
+      searchBoard[currentPosition.second * 2][currentPosition.first * 2] = 1
+      searchBoard[inBetweenPosition.second][inBetweenPosition.first] = 1
+   }
+
+   searchBoard[startPosition.second * 2][startPosition.first * 2] = 1
+   for (i in 1 ..< parts.size) {
+      val currentPosition = parts[i].position
+      val previousPosition = parts[i - 1].position
+      paintPart(currentPosition, previousPosition)
+   }
+
+   val width = searchBoard[0].size
+   val height = searchBoard.size
+   fun floodFill() {
+      val stack = ArrayDeque<Pair<Int, Int>>()
+      stack.addLast(0 to 0)
+
+      while (stack.isNotEmpty()) {
+         val position = stack.removeLast()
+         if (position.first < 0 ||
+                     position.first >= width ||
+                     position.second < 0 ||
+                     position.second >= height ||
+                     searchBoard[position.second][position.first] != 0.toByte()
+         ) {
+            continue
+         }
+         searchBoard[position.second][position.first] = 1
+         stack.addLast(position.first + 1 to position.second)
+         stack.addLast(position.first - 1 to position.second)
+         stack.addLast(position.first to position.second + 1)
+         stack.addLast(position.first to position.second - 1)
+      }
+   }
+
+   floodFill()
+
+   for (l in searchBoard) {
+      for (c in l) {
+         print(if (c == 1.toByte()) '#' else ' ')
+      }
+      println()
+   }
+
+   return searchBoard
+         .filterIndexed { i, _ -> i % 2 == 0 }
+         .flatMap { l -> l.filterIndexed { i, _ -> i % 2 == 0 } }
+         .count { b -> b == 0.toByte() }
+         .toString()
 }
 
 private const val input =
