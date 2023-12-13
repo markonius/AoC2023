@@ -1,7 +1,7 @@
 import kotlin.time.measureTime
 
 fun main() {
-   val problemNumber = arrayOf(12, 1)
+   val problemNumber = arrayOf(13, 0)
 
    val problems =
          arrayOf(
@@ -17,6 +17,7 @@ fun main() {
                pipeMaze,
                cosmicExpansion,
                hotSprings,
+               pointOfIncidence,
          )
 
    val problem = problems[problemNumber[0] - 1][problemNumber[1]]
