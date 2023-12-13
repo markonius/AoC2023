@@ -44,3 +44,11 @@ fun getPadded2DInput(input: String): List<String> {
 
    return lines
 }
+
+fun loadResource(filename: String): String {
+   return object {}::class.java.getResource(filename)!!.readText()
+}
+
+fun loadInput(day: Int): String {
+    return loadResource("input$day.txt").trimEnd().trimEnd('\n', '\r')
+}

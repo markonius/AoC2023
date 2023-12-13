@@ -32,6 +32,9 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+### Copyrighted inputs ###
+/src/main/resources/input*.txt
+
 ### VS Code ###
 # .vscode/
 

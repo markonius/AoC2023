@@ -35,6 +35,4 @@ fun waitForIt1(): String {
     return fastWindups.count().toString()
 }
 
-private const val input = """Time:        49     78     79     80
-Distance:   298   1185   1066   1181
-"""
+private val input get() = loadInput(6)
